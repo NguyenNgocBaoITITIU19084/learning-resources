@@ -1,0 +1,31 @@
+* 3 principles to create a schema in MySQL
+	- SMALL: lookup to your data and choose the smallest DATATYPE can hold all of your data
+	- SIMPLE: if your data is string just use the string datatype to hold it
+	- HONEST: data reflect from reality, if data have null column dont make column for null,
+			if you know data range you need to define range for it
+			
+* DATATYPE:
+		+-------------+----------------+-----------------+---------------+---------------+------------------+----------------+
+		| 	DATATYPE  |	Storage(Bytes) |  Storeage(Bits) | MinimumSigned | MaximumSigned | Minimum Unsigned	| Maximum Signed |
+		+-------------+----------------+-----------------+---------------+---------------+------------------+----------------+
+		|	TINYINT	  |				  1|	            8|           -128|			  127|				   0|			  255|
+		|	SMALLINT  |
+		|	MEDIUMINT |
+		|	INT		  |
+		|	BIGINT	  |
+		+-------------+----------------+-----------------+---------------+---------------+------------------+----------------+
+		
+* RANGE FOR INTEGER DATATYPE:
+	TINYINT: it contains 1 byte (8 bits) means that 11111111 = 255 (positive bit) and 0 1111111= -127 (negative bit)
+	SMALLINT: contains 2 bytes from 0 to 65535 and negative sign from -32768 to 32767 
+	MEDIUMINT: contains 3 bytes from 0 to 16777251 and negative sign from -8388608 to 8388607 
+	INT: contains 4 bytes from 0 to 4,294,967,295 and negative sign from -2147483648 to 2147483647
+	BIGINT: contains 8 bytes from 0 to 18,446,744,073,709,551,615 and negative sign from  -9223372036854775808 to 9223372036854775807
+	
+* RANGE FOR DECIMALS DATATYPE:
+	DECIMAL: a fixed-precision data type that stores exact value
+	NUMERIC: same with DECIMAL 
+	FLOAT: floating-point data type that stores approximate value
+	DOUBLE: like float but store large and more precise value than FLOAT
+* WHEN USE DECIMAL:
+	- If you need to store the value require absolute precision such as currency and financial data
