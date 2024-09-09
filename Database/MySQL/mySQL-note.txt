@@ -47,15 +47,40 @@ The amount of space require depends on the data being stored in the column. Decl
 The variable length do not occupy the full amount of space specify.
 	+CHAR -- fixed-length:
 	+VARCHAR -- variable-length:
-	+TINYTEXT:
-	+MEDIUMTEXT:
-	+TEXT:
-	+LONGTEXT:
-	+BINARY:
-	+VARBINARY:
+	
+* BINARY and VARBINARY: is look like CHAR and VARCHAR, but there is one thing different. CHAR and VARCHAR stores
+the string data and follow character set and collations, the BINARY and VARBINARY stores the bytes only.
+It provides efficient way to store binary data such as hashes or UUIDs.
+	+BINARY -- fixed-length:
+	+VARBINARY -- variable-length:
+	
+* TEXT and BLOB: TEXT is used to store the large amount of strings of text. It is important that 
+the text column are not indexable(without using the full text index) and cannot be store full their value
+It can index only a prefix of the columns or to sort by only the first few thousands of characters.
+
+BLOB is used to store thelarge amount of binary data. It is also can store the image and audio file
+, but we do not recommend it. It is good for store some third party and get store the link to 
+that place using VARCHAR.
+
+* NOTE TO KEEP IN MIND WHEN USING TEXT and BLOB:
+	- Only select the column that you need: because of how large TEXT and BLOB column are stored
+on the disk, it's best to only select them when you need them.
+	- Do not index or sort entire column: Because of the size of TEXT and BLOB columns is very large.
+you should only index or sort a prefix of the columns.
+	- use VARCHAR columns for smaller amount of data: using the VARCHAR for a few hundred characters,
+this can help with indexing and sorting.
+
+
 	+TINYBLOB:
 	+BLOB:
 	+MEDIUMBLOB:
-	+LONGBLOB:
+	+LONGBLOB(4 gigabytes of data):
+	
+	+TINYTEXT:
+	+MEDIUMTEXT:
+	+TEXT:
+	+LONGTEXT(4 gigabytes of data):
+	
+	
 	+ENUM:
 	+SET:
