@@ -62,6 +62,15 @@ BLOB is used to store thelarge amount of binary data. It is also can store the i
 , but we do not recommend it. It is good for store some third party and get store the link to 
 that place using VARCHAR.
 
+* NOTE TO KEEP IN MIND WHEN USING TEXT and BLOB:
+	- Only select the column that you need: because of how large TEXT and BLOB column are stored
+on the disk, it's best to only select them when you need them.
+	- Do not index or sort entire column: Because of the size of TEXT and BLOB columns is very large.
+you should only index or sort a prefix of the columns.
+	- use VARCHAR columns for smaller amount of data: using the VARCHAR for a few hundred characters,
+this can help with indexing and sorting.
+
+
 	+TINYBLOB:
 	+BLOB:
 	+MEDIUMBLOB:
@@ -72,5 +81,18 @@ that place using VARCHAR.
 	+TEXT:
 	+LONGTEXT(4 gigabytes of data):
 	
-	+ENUM:
+* ENUM: look like a string but they are stored as integer. Enums give you the readability of a string
+with the compact data type of an integer.
+	SYNTAX:
+		CREATE TABLE orders (
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			size ENUM('extra small', 'small', 'medium', 'large', 'extra large')
+		);
+		INSERT INTO orders (size) VALUES (2), ('medium'), ('large');
+		
+	+ DISADVANTAGES:
+		- If the bussiness requirement changes, and you need to add another to the allowable values,
+you will have to alter the schema of your table to add a new enum.
+		- when using sort, the mysql will sort the enum by integer, it can be make confusing
+		- 
 	+SET:

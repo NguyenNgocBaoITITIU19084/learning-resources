@@ -81,6 +81,18 @@ this can help with indexing and sorting.
 	+TEXT:
 	+LONGTEXT(4 gigabytes of data):
 	
-	
-	+ENUM:
+* ENUM: look like a string but they are stored as integer. Enums give you the readability of a string
+with the compact data type of an integer.
+	SYNTAX:
+		CREATE TABLE orders (
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			size ENUM('extra small', 'small', 'medium', 'large', 'extra large')
+		);
+		INSERT INTO orders (size) VALUES (2), ('medium'), ('large');
+		
+	+ DISADVANTAGES:
+		- If the bussiness requirement changes, and you need to add another to the allowable values,
+you will have to alter the schema of your table to add a new enum.
+		- when using sort, the mysql will sort the enum by integer, it can be make confusing.
+		- it is important that integer enumm can be confusing and shuold be avoided if possible
 	+SET:
