@@ -29,3 +29,29 @@
 	DOUBLE: like float but store large and more precise value than FLOAT
 * WHEN USE DECIMAL:
 	- If you need to store the value require absolute precision such as currency and financial data
+	- DECIMAL(10,2) there are 10 digits 2 digits after point 
+* WHEN USE FLOAT or DOUBLE:
+	- If you are using the scientific calculating data type
+* NOTE FOR NUMERIC: 
+	- All the numeric data types may have an extra option: UNSIGNED or ZEROFILL.
+ If you add the UNSIGNED option, MySQL disallows negative values for the column.
+ If you add the ZEROFILL option, MySQL automatically also adds the UNSIGNED attribute to the column.
+ 
+ *STRING DATATYPE:
+	* FIXED-LENGTH:
+	* VARIABLE-LENGTH:
+ 
+	+CHAR -- fixed-length:
+	+VARCHAR -- variable-length:
+	+TINYTEXT:
+	+MEDIUMTEXT:
+	+TEXT:
+	+LONGTEXT:
+	+BINARY:
+	+VARBINARY:
+	+TINYBLOB:
+	+BLOB:
+	+MEDIUMBLOB:
+	+LONGBLOB:
+	+ENUM:
+	+SET:
