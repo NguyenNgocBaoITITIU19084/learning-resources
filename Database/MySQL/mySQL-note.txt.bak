@@ -1,5 +1,5 @@
 * 3 principles to create a schema in MySQL
-	- SMALL: lookup to your data and choose the smallest DATATYPE can hold all of your data
+	- SMALL: lookup to your data and choose the smallest DATATYPE can hold all of your data, less memory faster process
 	- SIMPLE: if your data is string just use the string datatype to hold it
 	- HONEST: data reflect from reality, if data have null column dont make column for null,
 			if you know data range you need to define range for it
