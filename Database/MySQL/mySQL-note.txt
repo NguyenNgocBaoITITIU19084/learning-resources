@@ -117,5 +117,20 @@ this typre is useful for a 10-day range denominated in hours, minutes and second
 	
 	* Get value of key:
 		SELECT `json`->>"$.name" as name from has_json
+	* INDEXING:
+		- mysql allow to create index in specific key of object 
 		
+* GENERATED COLUMN:
+	- Generate column is a column that is computed by an expression, rather than being explicitly stored
+in the table. The idea is that you can define a column using a formula or calculation.
+	Example:
+		CREATE TABLE email(
+			email varchar(255),
+			domain varchar(255) AS (substring_index(email, @, -1))
+		);
 		
+* VIRTUAL and STORED Column:
+	- A virtual column is calculated at runtime and does not take up any space on disk. This mean that 
+it take longer time to calculate and does not impact the overall size of data
+	- STORED column is calculating data during insert or update and then save to disk
+-> faster in retrieve column

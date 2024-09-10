@@ -1,5 +1,6 @@
 * 3 principles to create a schema in MySQL
-	- SMALL: lookup to your data and choose the smallest DATATYPE can hold all of your data, less memory faster process
+	- SMALL: lookup to your data and choose the smallest DATATYPE can hold all of your data,
+less memory faster process
 	- SIMPLE: if your data is string just use the string datatype to hold it
 	- HONEST: data reflect from reality, if data have null column dont make column for null,
 			if you know data range you need to define range for it
@@ -103,4 +104,32 @@ you will have to alter the schema of your table to add a new enum.
 		+ YEAR: store the year from 1901 to 2155
 		+ TIME: using to store hour, minutes, seconds. it can store more than 24 hours.
 this typre is useful for a 10-day range denominated in hours, minutes and second
-	+SET:
+
+* JSON DATA TYPE: 
+	SYNTAX:
+		CREATE TABLE has_json(
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			json JSON NULL
+		);
+		
+	* VALIDATION: mysql auto validation value which insert into db by json format
+	INSERT INTO has_json (json) VALUES ('{"name": "baonguyen"}')
+	
+	* Get value of key:
+		SELECT `json`->>"$.name" as name from has_json
+	* INDEXING:
+		- mysql allow to create index in specific key of object 
+		
+* GENERATED COLUMN:
+	- Generate column is a column that is computed by an expression, rather than being explicitly stored
+in the table. The idea is that you can define a column using a formula or calculation.
+	Example:
+		CREATE TABLE email(
+			email varchar(255),
+			domain varchar(255) AS (substring_index(email, @, -1))
+		);
+		
+* VIRTUAL and STORED Column:
+	- A virtual column is calculated at runtime and does not take up any space on disk. This mean that 
+it take longer time to calculate and does not impact the overall size of data
+	- STORED column is calculating data during insert or update and then save to disk -> faster in retrieve column
