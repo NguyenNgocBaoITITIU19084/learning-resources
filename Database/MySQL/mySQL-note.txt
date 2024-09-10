@@ -1,5 +1,5 @@
 * 3 principles to create a schema in MySQL
-	- SMALL: lookup to your data and choose the smallest DATATYPE can hold all of your data
+	- SMALL: lookup to your data and choose the smallest DATATYPE can hold all of your data, less memory faster process
 	- SIMPLE: if your data is string just use the string datatype to hold it
 	- HONEST: data reflect from reality, if data have null column dont make column for null,
 			if you know data range you need to define range for it
@@ -95,4 +95,12 @@ with the compact data type of an integer.
 you will have to alter the schema of your table to add a new enum.
 		- when using sort, the mysql will sort the enum by integer, it can be make confusing.
 		- it is important that integer enumm can be confusing and shuold be avoided if possible
+		
+* 	DATE DATE TYPE:
+		+ DATE: only store date from 1000 to 9999
+		+ DATETIME: store both date and time, it occupy 8 bytes to store, so it can up to 9999 year
+		+ TIMESTAMP: store both date and time, but occupy only 4 byte to store, so the limitation from 1970 to 2038
+		+ YEAR: store the year from 1901 to 2155
+		+ TIME: using to store hour, minutes, seconds. it can store more than 24 hours.
+this typre is useful for a 10-day range denominated in hours, minutes and second
 	+SET:
