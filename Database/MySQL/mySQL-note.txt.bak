@@ -132,4 +132,32 @@ in the table. The idea is that you can define a column using a formula or calcul
 * VIRTUAL and STORED Column:
 	- A virtual column is calculated at runtime and does not take up any space on disk. This mean that 
 it take longer time to calculate and does not impact the overall size of data
-	- STORED column is calculating data during insert or update and then save to disk -> faster in retrieve column
+	- STORED column is calculating data during insert or update and then save to disk
+-> faster in retrieve column
+
+***====================================*****========================================***
+								INDEXES IN MYSQL
+* B+ TREES: the algorithsm using for the indexes in the mysql is b+ tree algorithsm
+
+***====================================*****========================================***
+								MySQL Constraints
+* PRIMARY KEY:
+	- There is only one primary key in each table.
+	- A primary key can contain a column or set of columns
+	- A primary key is UNIQUE AND NOT NULL column
+	- If primary key contains multiple of columns, the combination of values in these column must be
+unique
+	SYNTAX:
+		CREATE TABLE has_columns(
+			id bigint unsigned auto_increment primary key
+		);
+		
+		CREATE TABLE has_columns(
+			id bigint auto_increment,
+			name varchar(255) not null
+			primary key(id,name)
+		);
+	
+	* Adding Primary Key to Existing Table:
+		ALTER TABLE name 
+		ADD Primary Key(id)
