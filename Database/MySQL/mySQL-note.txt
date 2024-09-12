@@ -368,3 +368,22 @@ and then import into child table
 	* Remove NOt NULL constraint:
 		ALTER TABLE table_name
 		MODIFY column_name column_definition;
+		
+* DEFAULT CONSTRAINT:
+	- this constraint allow you specify the default value for the column
+	- default value must be number or string 
+	- default value can not be function or argument
+	- when you insert new value you do not need to provide default value
+	EXAMPLE:
+		CREATE TABLE example(
+			id int primary key,
+			sales_tax DECIMAL(5,2) NOT NULL DEFAULT 0.1
+		);
+		
+	* ADDING a DEFAULT to existed column:
+	ALTER TABLE table_name
+	ALTER COLUMN column_name SET DEFAULT default_value;
+	
+	* Removing a DEFAULT
+	ALTER TABLE table_name
+	ALTER column_name DROP DEFAULT;
