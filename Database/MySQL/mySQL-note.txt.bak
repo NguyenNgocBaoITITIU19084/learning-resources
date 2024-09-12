@@ -296,3 +296,30 @@ or updating rows in the parent table.
 	* Drop the FOREIGN KEY:
 	ALTER TABLE table_name 
 	DROP FOREIGN KEY constraint_name;
+	
+	* DISABLING THE FOREIGN KEY:
+		- It is very useful to disable foreign key check, when you import data from csv file.
+		- If you do not disable before import data you have to import data into parent table first
+and then import into child table 
+
+* UNIQUE CONSTRAINT:
+	- The Unique constraint make sure that the value in the column of table is unique.
+	SYNTAX:
+		CREATE TABLE example(
+			id int unsigned auto_increament primary key,
+			email varchar(255) UNIQUE
+		);
+		
+		CREATE TABLE table_name(
+			column1 datatype,
+			column2 datatype,
+			...,
+			UNIQUE(column1, column2)
+		);
+	NOTE:
+		- Becarefull with null value, we can insert null value into UNIQUE column with out duplicated error
+	* DROP A UNIQUE CONSTRAINT:
+		SYNTAX: 
+			DROP INDEX index_name ON table_name;
+			ALTER TABLE table_name DROP INDEX index_name;
+			
