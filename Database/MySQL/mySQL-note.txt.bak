@@ -322,4 +322,47 @@ and then import into child table
 		SYNTAX: 
 			DROP INDEX index_name ON table_name;
 			ALTER TABLE table_name DROP INDEX index_name;
+	* ADD UNIQUE CONSTRAIN INTO EXISTED TABLE:
+		ALTER TABLE table_name
+		ADD CONSTRAINT constraint_name 
+		UNIQUE (column_list);
+		
+*	NOT NULL CONSTRAINT:
+	- The NOT NULL constraint make sure that the value you store in the column is not null
+	SYNTAX:
+		CREATE TABLE has_example(
+			id primary key,
+			name NOT NULL
+		);
+	* Adding NOT NULL contrains into existed table:
+		1. find all current row contains null value.
+		2. update all null value.
+		3. modify the column with not null contraint.
+		EXAMPLE: 
+			CREATE TABLE tasks (
+				id INT AUTO_INCREMENT PRIMARY KEY,
+				title VARCHAR(255) NOT NULL,
+				start_date DATE NOT NULL,
+				end_date DATE
+			);
 			
+			INSERT INTO tasks(title ,start_date, end_date)
+			VALUES('Learn MySQL NOT NULL constraint', '2017-02-01','2017-02-02'),
+			('Check and update NOT NULL constraint to your database', '2017-02-01',NULL);
+			
+			// step 1:
+			SELECT * FROM tasks 
+			WHERE end_date IS NULL;
+			
+			//step 2:
+			UPDATE tasks 
+			SET end_date = start_date + 7
+			WHERE end_date IS NULL;
+			
+			// step 3:
+			ALTER TABLE tasks 
+			CHANGE 
+			end_date 
+			end_date DATE NOT NULL;
+	
+	* Remove NOt NULL constraint:
