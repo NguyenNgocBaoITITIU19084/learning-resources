@@ -164,3 +164,140 @@ unique
 	* Removing Primary Key from Existing Table:
 		ALTER TABLE name
 		REMOVE Primary Key(id)
+
+* FOREIGN KEY:
+	- Foreign key is a column or group of column in table link to a column and group of column in another 
+table.
+	- A table can have many foreign key and each foreign key can link to primary key in another table.
+	Example:
+		  customer  				orders
+		+---------+ 			  +-----------+
+		|cus_id(pk)|			  |oder_id(pk)|
+		| name    |  one to many  | cus_id(fk)|
+		+---------+	 foreign key  +-----------+
+		
+	* Self-referencing foreign key:
+	- The child table and parent table may refer to the same table.
+	Example: 
+		employee
+	   +---------+
+	   |id(PK)	 |  employee can send report to other employee in reportTO column or set null
+	   |name	 |	each employee can have 0 or many report
+	   |reportTo(FK)|
+	   +---------+
+	* SYNTAX:
+		[CONSTRAINT constraint_name] // -> optional, automatically generated name
+		FOREIGN KEY [foreign_key_name] (column_name, ...) // ->[foreign_key_name] optional
+		REFERENCES parent_table(colunm_name,...)
+		[ON DELETE reference_option] 
+		[ON UPDATE reference_option]
+	
+* MySQL has five reference_options: 
+	+ CASCADE: if the row from the parent table is deleted or updated, the values of the mactching rows in
+child table are automatically deleted or updated.
+	+ SET NULL: if the row from the parent table is deleted or updated, the values of the foreign key 
+in child table are set to NULL
+	+ RESTRICT: if a row in the parent table has a matching row in the child table, mySQL reject deleting
+or updating rows in the parent table.
+	+ NO ACTION: is the same as RETRICT
+	+ SET DEFAULT: is recognized by the mySQL parser. However, this action is reject by both InnoDB and NDB table
+	* EXAMPLE RESTRIC and NO ACTION:
+		CREATE TABLE categories(
+			categoryId INT AUTO_INCREMENT PRIMARY KEY, 
+			categoryName VARCHAR(100) NOT NULL
+		) ENGINE = INNODB;
+
+		// mysql auto set RESTRICT when we do not set reference_optinal to ON UPDATE and ON DELETED
+		CREATE TABLE products(
+			productId INT AUTO_INCREMENT PRIMARY KEY, 
+			productName VARCHAR(100) NOT NULL, 
+			categoryId INT, 
+			CONSTRAINT fk_category 
+			FOREIGN KEY (categoryId) 
+            REFERENCES categories(categoryId)
+		) ENGINE = INNODB;
+
+		INSERT INTO categories(categoryName)
+			VALUES
+			('Smartphone'),
+			('Smartwatch');
+		
+		INSERT INTO products(productName, categoryId)
+			VALUES('iPhone',1);
+			
+			// can not do that b/c there is no categoryId = 3
+		INSERT INTO products(productName, categoryId)
+			VALUES('iPad',3);
+		
+		// can not update or deleted parent table b/c RETRICT AND NO ACTION
+		UPDATE categories
+		SET categoryId = 100
+		WHERE categoryId = 1;
+		
+	* EXAMPLE: CASCADE action
+		CREATE TABLE products(
+			productId INT AUTO_INCREMENT PRIMARY KEY,
+			productName varchar(100) not null,
+			categoryId INT NOT NULL,
+			CONSTRAINT fk_category
+			FOREIGN KEY (categoryId) 
+			REFERENCES categories(categoryId)
+				ON UPDATE CASCADE
+				ON DELETE CASCADE
+		) ENGINE=INNODB;
+		
+		INSERT INTO products(productName, categoryId)
+		VALUES
+			('iPhone', 1), 
+			('Galaxy Note',1),
+			('Apple Watch',2),
+			('Samsung Galary Watch',2);
+
+		UPDATE categories
+		SET categoryId = 100
+		WHERE categoryId = 1; // also update on products table and categories table because of CASCADE
+		
+		DELETE FROM categories
+		WHERE categoryId = 2; // also delete on products table and categories table because of CASCADE
+		
+	* EMXAMPLE: SET NULL
+		CREATE TABLE categories(
+			categoryId INT AUTO_INCREMENT PRIMARY KEY,
+			categoryName VARCHAR(100) NOT NULL
+		)ENGINE=INNODB;
+
+		CREATE TABLE products(
+			productId INT AUTO_INCREMENT PRIMARY KEY,
+			productName varchar(100) not null,
+			categoryId INT,
+			CONSTRAINT fk_category
+			FOREIGN KEY (categoryId) 
+			REFERENCES categories(categoryId)
+				ON UPDATE SET NULL
+				ON DELETE SET NULL 
+		)ENGINE=INNODB;
+		
+		INSERT INTO categories(categoryName)
+		VALUES
+			('Smartphone'),
+			('Smartwatch');
+			
+		INSERT INTO products(productName, categoryId)
+		VALUES
+			('iPhone', 1), 
+			('Galaxy Note',1),
+			('Apple Watch',2),
+			('Samsung Galary Watch',2);
+			
+			UPDATE | DELETE categories
+			SET categoryId = 100
+			WHERE categoryId = 1; // update or delete the parent also set null value to the child 
+			
+	* Drop the FOREIGN KEY:
+	ALTER TABLE table_name 
+	DROP FOREIGN KEY constraint_name;
+	
+	* DISABLING THE FOREIGN KEY:
+		- It is very useful to disable foreign key check, when you import data from csv file.
+		- If you do not disable before import data you have to import data into parent table first
+and then import into child table 
