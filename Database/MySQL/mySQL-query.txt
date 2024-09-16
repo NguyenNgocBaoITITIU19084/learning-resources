@@ -54,3 +54,24 @@
 				'Disputed', 
 				'Shipped'
 			);
+	* WHERE CLAUSE:
+		- Where clause allow you specify search_condition for SELECT, UPDATE, DELETE clause
+		- Search_condition is a combination of one or more expressions using the logical operator AND, OR, NOT
+		- MYSQL will execute FROM -> WHERE -> SELECT -> ORDER BY
+			SYNTAX:
+				SELECT select_list
+				FROM table_name
+				WHERE search_condition;
+			EXAMPLE:
+				Select firstName, lastName, officeCode, jobTitle 
+				From employees where jobTitle = 'VP Sales' 
+				AND 
+				officeCode BETWEEN 1 AND 3 
+				ORDER BY officeCode
+		* Using with comparision operator:
+			- Equal to OP, can use with almost datatype = 
+			- Not equal to <> or !=
+			- Less than <
+			- Greater than >
+			- Less than or equal <=
+			- Greater than or equal

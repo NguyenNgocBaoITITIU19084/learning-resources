@@ -36,7 +36,7 @@
 	- The FIELD() function return the index (position) of a value within a list of values
 	- The value for which you wanto find the position
 	- The value1, value2 is the list of values against which you want compare specific field
-	- In ORDER CLAUSE, the null value is lower than non-NULL value
+	- In ORDER CLAUSE, the NULL value is lower than non-NULL value
 		SYNTAX:
 			FIELD(value, value1, value2,...)
 		EXAMPLE:
@@ -54,3 +54,17 @@
 				'Disputed', 
 				'Shipped'
 			);
+	* WHERE CLAUSE:
+		- Where clause allow you specify search_condition for SELECT, UPDATE, DELETE clause
+		- Search_condition is a combination of one or more expressions using the logical operator AND, OR, NOT
+		- MYSQL will execute FROM -> WHERE -> SELECT -> ORDER BY
+			SYNTAX:
+				SELECT select_list
+				FROM table_name
+				WHERE search_condition;
+			EXAMPLE:
+				Select firstName, lastName, officeCode, jobTitle 
+				From employees where jobTitle = 'VP Sales' 
+				AND 
+				officeCode BETWEEN 1 AND 3 
+				ORDER BY officeCode
