@@ -9,5 +9,48 @@
 		
 			SELECT 1 + 1 as total;
 			
-			
-	
+	* ORDER BY CLAUSE
+	- To sort the result from the SELECT clause using the ORDER BY
+	- ASC standard for ascending 
+	- DESC standard for descending
+	- By default the ORDER BY using the ASC if you do not specify any option
+	- MySQL will execute the FROM -> SELECT -> ORDER BY clause.
+	- Result will sort by solumn1 first, then it will sort by column2 base on sorted result of column1
+		SYNTAX:
+			SELECT select_list
+			FROM table_name
+			ORDER BY 
+			column1 [ASC|DESC], 
+			column2 [ASC|DESC],
+			...;
+		EXAMPLE:
+			SELECT 
+				orderNumber, 
+				orderLineNumber, 
+				quantityOrdered * priceEach AS subtotal 
+			FROM 
+				orderdetails 
+			ORDER BY 
+				subtotal DESC;
+		* Using the MySQL ORDER BY clause to sort data using a custom list
+	- The FIELD() function return the index (position) of a value within a list of values
+	- The value for which you wanto find the position
+	- The value1, value2 is the list of values against which you want compare specific field
+	- In ORDER CLAUSE, the NULL value is lower than non-NULL value
+		SYNTAX:
+			FIELD(value, value1, value2,...)
+		EXAMPLE:
+			SELECT 
+				orderNumber, 
+				status 
+			FROM orders 
+			ORDER BY 
+			FIELD(
+				status, 
+				'In Process', 
+				'On Hold', 
+				'Cancelled', 
+				'Resolved', 
+				'Disputed', 
+				'Shipped'
+			);
