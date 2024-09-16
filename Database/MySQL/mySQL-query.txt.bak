@@ -68,3 +68,27 @@
 				AND 
 				officeCode BETWEEN 1 AND 3 
 				ORDER BY officeCode
+		* Using with comparision operator:
+			- Equal to OP, can use with almost datatype = 
+			- Not equal to <> or !=
+			- Less than <
+			- Greater than >
+			- Less than or equal <=
+			- Greater than or equal >=
+	
+	* SELECT DISTINCT
+		- when you querying data from a table, you may get duplicate rows. To remove duplicate rows
+using the SELECT DISTINCT
+		- If you specify DISTINCT for the column contains Null-value, DISTINCT will keep only one 
+Null-value. Because it consider that all null value are the same
+		- MySQL execute FROM -> WHERE -> SELECT -> DISTINCT -> ORDER BY
+		SYNTAX:
+			SELECT DISTINCT
+				select_list
+			FROM 
+				table_name
+			WHERE 
+				search_condition
+			ORDER BY 
+				sort_expression;
+				

@@ -74,4 +74,30 @@
 			- Less than <
 			- Greater than >
 			- Less than or equal <=
-			- Greater than or equal
+			- Greater than or equal >=
+	
+	* SELECT DISTINCT
+		- when you querying data from a table, you may get duplicate rows. To remove duplicate rows
+using the SELECT DISTINCT
+		- If you specify DISTINCT for the column contains Null-value, DISTINCT will keep only one 
+Null-value. Because it consider that all null value are the same
+		- MySQL execute FROM -> WHERE -> SELECT -> DISTINCT -> ORDER BY
+		SYNTAX:
+			SELECT DISTINCT
+				select_list
+			FROM 
+				table_name
+			WHERE 
+				search_condition
+			ORDER BY 
+				sort_expression;
+		EXAMPLE:
+			SELECT DISTINCT
+				state, city
+			FROM
+				customers
+			WHERE
+				state IS NOT NULL
+			ORDER BY 
+				state, 
+				city;
