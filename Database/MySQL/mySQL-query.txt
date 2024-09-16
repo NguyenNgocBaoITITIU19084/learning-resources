@@ -1,0 +1,13 @@
+*****==========================MYSQL QUERY=============================*****
+	- SELECT set of column form a table
+	- When using the SELECT statement mySQL executing the FORM statement before the SELECT statement
+	- SELECT statement does not require the FORM clause
+	- Assign an alias to a column to make it more readable
+		SYNTAX: 
+			SELECT select_list
+			FROM table_name;
+		
+			SELECT 1 + 1 as total;
+			
+			
+	
