@@ -144,7 +144,8 @@ operator, MYSQL will stop evaluating the remaining parts of the expression as so
 			OR country = 'France')
 			AND creditlimit > 100000;
 	* IN operator:
-		The IN operator allow you to determine if the value matches any value in a list of values
+		- The IN operator allow you to determine if the value matches any value in a list of values4
+		- return 1 if matches, 0 if not
 			SYNTAX:
 				value IN (value1, value2, ...)
 			EXAMPLE:
@@ -165,4 +166,13 @@ operator, MYSQL will stop evaluating the remaining parts of the expression as so
 				FROM
 					offices
 				WHERE
-					country IN ('USA' , 'France');
+					country IN ('USA' , 'France'); | contry = 'USA' OR country = 'France'
+		
+	* NOT IN OPERATOR:
+		- return 1 if value does not match any value in list. Otherwise, return 0
+		- return NULL if the value on the left handside is NULL
+		SYNTAX:
+			value NOT IN (value1, value2, value2)
+		EXAMPLE:
+			SELECT 1 NOT IN (1,2,3);
+			SELECT 0 NOT IN (1,2,3);
