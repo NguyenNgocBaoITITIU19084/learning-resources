@@ -125,3 +125,21 @@ operator, MYSQL will stop evaluating the remaining parts of the expression as so
 			country = 'USA' AND 
 			state = 'CA' AND 
 			creditlimit > 100000;
+			
+	* OR operator:
+		- OR operator is also short-circuited. ex: SELECT 1 = 1 OR 1 / 0;
+		- To change precedence of OR operator using the parentheses SELECT (1 OR 0) AND 0;
+				TRUE	FALSE	NULL
+		TRUE	TRUE	TRUE	TRUE
+		FALSE	TRUE	FALSE	NULL
+		NULL	TRUE	NULL	NULL
+			Example: 
+			SELECT   
+				customername, 
+				country, 
+				creditLimit
+			FROM   
+				customers
+			WHERE(country = 'USA'
+			OR country = 'France')
+			AND creditlimit > 100000;
