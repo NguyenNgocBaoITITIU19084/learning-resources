@@ -143,3 +143,26 @@ operator, MYSQL will stop evaluating the remaining parts of the expression as so
 			WHERE(country = 'USA'
 			OR country = 'France')
 			AND creditlimit > 100000;
+	* IN operator:
+		The IN operator allow you to determine if the value matches any value in a list of values
+			SYNTAX:
+				value IN (value1, value2, ...)
+			EXAMPLE:
+				SELECT 1 IN (1,2,3);
+		* IN operator and NULL value:
+			- The IN operator return null value in 2 case:
+				+ The value in left hand side is null 
+				+ The value does not equal any value in the list and exists one null value in the list
+			EXAMPLE:
+				SELECT NULL IN (1,2,3);
+				SELECT 0 IN (1,2,3,NULL);
+			
+				SELECT 
+					officeCode, 
+					city, 
+					phone, 
+					country
+				FROM
+					offices
+				WHERE
+					country IN ('USA' , 'France'); | contry = 'USA' OR country = 'France'
