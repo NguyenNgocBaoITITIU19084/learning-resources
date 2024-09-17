@@ -176,3 +176,15 @@ operator, MYSQL will stop evaluating the remaining parts of the expression as so
 		EXAMPLE:
 			SELECT 1 NOT IN (1,2,3);
 			SELECT 0 NOT IN (1,2,3);
+			SELECT NULL NOT IN (1,2,3);
+			
+	* BETWEEN OPERATOR:
+		- The BETWEEN operator is logical operator that specific the value in range or not.
+		- The value of the value, low, high is null, the operator will return null
+		
+			SYNTAX:
+				value BETWEEN low AND high;
+				SELECT 15 NOT BETWEEN 10 AND 20;
+			EXAMPLE:
+				
+				
