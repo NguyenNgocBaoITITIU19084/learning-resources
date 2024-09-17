@@ -91,4 +91,26 @@ Null-value. Because it consider that all null value are the same
 				search_condition
 			ORDER BY 
 				sort_expression;
-				
+		EXAMPLE:
+			SELECT DISTINCT
+				state, city
+			FROM
+				customers
+			WHERE
+				state IS NOT NULL
+			ORDER BY 
+				state, 
+				city;
+	* AND OPERATOR:
+	- The AND operator is as logical operator that combines two or more Boolean expressions 
+as returns 0,1,null.
+	- The AND operator have higher precedence than OR operator
+	- The AND operator is short-circuit evaluation. When evaluation an expression that contain the AND
+operator, MYSQL will stop evaluating the remaining parts of the expression as soon as it can.
+	SELECT 1 = 0 AND 1 / 0;
+					TRUE	FALSE	NULL
+			TRUE	TRUE	FALSE	NULL
+			FALSE	FALSE	FALSE	FALSE
+			NULL	NULL	FALSE	NULL
+
+	EXAMPLE:
