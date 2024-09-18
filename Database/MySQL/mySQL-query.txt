@@ -203,3 +203,32 @@ operator, MYSQL will stop evaluating the remaining parts of the expression as so
 					requireddate BETWEEN 
 					CAST('2003-01-01' AS DATE) AND 
 					CAST('2003-01-31' AS DATE);
+					
+	* LIKE OPERATOR:
+		- The LIKE operator is a logical operator that tests whether a string contains a specified pattern
+or not 
+		- MySQL provides two wildcard characters: percentaged (%) and underscore(_)
+		- One underscore contains one character
+		- s% matches any string with the character such as sun and six
+		- se_ matches any string with the character sea and see
+		SYNTAX:
+		expression LIKE pattern ESCAPE escape_character;
+		EXAMPLE:
+			SELECT 
+				employeeNumber, 
+				lastName, 
+				firstName
+			FROM
+				employees
+			WHERE
+				firstname LIKE 'T_m'; | lastname LIKE '%on%'; |  lastName NOT LIKE 'B%';
+		* LIKE OPERATOR WITH ESCAPE CLAUSE:
+		- Using the escapse to specific underscore(_) and percentage as the character such as '20%' or '_20'
+			SYNTAX: 
+				SELECT 
+					productCode, 
+					productName
+				FROM
+					products
+				WHERE
+					productCode LIKE '%\_20%';
