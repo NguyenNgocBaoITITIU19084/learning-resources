@@ -223,7 +223,7 @@ or not
 			WHERE
 				firstname LIKE 'T_m'; | lastname LIKE '%on%'; |  lastName NOT LIKE 'B%';
 		* LIKE OPERATOR WITH ESCAPE CLAUSE:
-		- Using the escapse to specific underscore(_) and percentage as the character such as 20% or _20
+		- Using the escapse to specific underscore(_) and percentage as the character such as '20%' or '_20'
 			SYNTAX: 
 				SELECT 
 					productCode, 
@@ -232,3 +232,38 @@ or not
 					products
 				WHERE
 					productCode LIKE '%\_20%';
+					
+	* LIMIT OPERATOR:
+		- Limit the result return from the query
+		- Always using the ORDER BY clause
+		- The Offset is numbers of rows is skipped(first row is 0)
+		- Rowcount is numbers of rows is return from the query
+		- mysql execute by order from -> where -> distinct -> select -> order by -> limit
+		SYNTAX:
+			SELECT 
+				select_list
+			FROM
+				table_name
+			LIMIT [offset,] row_count;
+		EXAMPLE:
+			SELECT 
+				customerNumber, 
+				customerName, 
+				creditLimit
+			FROM
+				customers
+			ORDER BY 
+				creditLimit, 
+				customerNumber
+			LIMIT 5;
+		* LIMIT clause for PAGINATION:
+		- To calculate offset, take total rows divide by the limit of row each page 
+		EXAMPLE take 10 rows skip 10 first rows:
+			SELECT 
+				customerNumber, 
+				customerName
+			FROM
+				customers
+			ORDER BY customerName    
+			LIMIT 10, 10;
+		* LIMIT OPERATOR to get the nth highest or lowest value
