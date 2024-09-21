@@ -315,3 +315,52 @@ row in the result set. Otherwise, the INNER JOIN just ignores the rows.
 				orderNumber, 
 				orderLineNumber;
 		* INNER JOIN WITH OTHER OPERATOR(>,<,=,<>)
+			EXAMPLE:
+				SELECT 
+					orderNumber, 
+					productName, 
+					msrp, 
+					priceEach
+				FROM
+					products p
+				INNER JOIN orderdetails o 
+					ON p.productcode = o.productcode
+						AND p.msrp > o.priceEach
+				WHERE
+					p.productcode = 'S10_1678';
+	
+	* LEFT JOIN:
+		- In essence, the LEFT JOIN returns all rows from the left table, irrespective of whether a 
+matching row from the right table exists or not.
+		- In the absence of a match, the columns of the row from the right table will be filled with NULL values.
+		SYNTAX:
+			SELECT 
+				select_list
+			FROM
+				t1
+			LEFT JOIN t2 ON 
+				join_condition;
+		* USING LEFT JOIN TO FIND UNMATCHED ROW:
+			SELECT 
+				c.customerNumber, 
+				c.customerName, 
+				o.orderNumber, 
+				o.status
+			FROM
+				customers c
+			LEFT JOIN orders o 
+				ON c.customerNumber = o.customerNumber
+			WHERE
+				orderNumber IS NULL;
+				
+	* RIGHT JOIN:
+		- Return all column in the right table whatever row in right column matching or not to row in 
+left table
+		SYNTAX:
+			SYNTAX:
+			SELECT 
+				select_list
+			FROM
+				t1
+			LEFT JOIN t2 ON 
+				join_condition;
