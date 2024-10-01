@@ -362,5 +362,5 @@ left table
 				select_list
 			FROM
 				t1
-			LEFT JOIN t2 ON 
+			RIGHT JOIN t2 ON 
 				join_condition;

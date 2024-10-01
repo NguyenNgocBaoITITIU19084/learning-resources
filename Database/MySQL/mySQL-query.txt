@@ -364,3 +364,4 @@ left table
 				t1
 			RIGHT JOIN t2 ON 
 				join_condition;
+	* SELF JOIN:

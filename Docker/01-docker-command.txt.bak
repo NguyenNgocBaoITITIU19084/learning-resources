@@ -1,0 +1,40 @@
+### list container running
+	$ docker ps -a
+
+### list all image
+	$ docker image ls
+
+### Build new container 
+	$ docker build -t docker_name/tagname
+
+### running a container
+	$ docker run -p <PORT>:<PORT> docker_name
+
+### push container to docker hub
+# 1. create docker repository on docker hub
+# 2. build the image/container
+# 3. link image with docker hub
+	$ docker tag image_name docker_name/repository_name
+	ex: $ docker tag nguyenngocbao19/getting-started-todo-app nguyenngocbao10/testing
+# 4. push to docker hub
+	$ docker push docker_name/:tagname
+	ex: $ docker push nguyenngocbao19/testing:version-1.0.0
+	
+### Create volume(Persit data)
+	$ docker volume create <name_db>
+# Running app using volume to store data
+	$ docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=<DB_NAME>,target=/etc/<NAME> <IMGAE_NAME>
+# View the place to store data
+	$ docker volume inspec
+	
+### Create Network
+	$ docker network create <Network_Name>
+	ex: $ docker network create todo-network
+	
+# run mySQL container and attach it to network (CMD)
+	$ docker run -d `
+    --network todo-app --network-alias mysql `
+    -v todo-mysql-data:/var/lib/mysql `
+    -e MYSQL_ROOT_PASSWORD=secret `
+    -e MYSQL_DATABASE=todos `
+    mysql:8.0
