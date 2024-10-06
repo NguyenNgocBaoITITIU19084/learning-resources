@@ -8,3 +8,10 @@ in the background.
 * Round - Robin dispatching:
 	- The task in queue will be distribute each worker which is running. Each worker received a same 
 among of task
+
+* { durable: true }. When the server crack or reset the message in the queue will be not loss.
+* { persistent: true }. The data of queue (messages) will be stored in disk or cache.
+	- NOTE: Durable and persistent come together
+* { experin: milisecond }. Time to live of the message (TTL)
+* { noAck: true | false }. Reply to producer the message is received or not. If not the producer will send 
+the message to new consumer 

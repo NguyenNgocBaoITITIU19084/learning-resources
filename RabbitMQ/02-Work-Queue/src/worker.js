@@ -31,7 +31,7 @@ amqp.connect("amqp://localhost", function (error0, connection) {
       {
         // manual acknowledgment mode,
         // see /docs/confirms for details
-        ack: true,
+        noAck: true,
       }
     );
   });
