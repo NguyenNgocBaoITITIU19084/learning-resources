@@ -2,7 +2,7 @@
 
 const amqp = require("amqplib/callback_api");
 
-amqp.connect("amqp://guest:guest@localhost", function (error0, connection) {
+amqp.connect("amqp://localhost", function (error0, connection) {
   if (error0) {
     throw error0;
   }
@@ -12,11 +12,11 @@ amqp.connect("amqp://guest:guest@localhost", function (error0, connection) {
     }
     var queue = "task_queue";
 
-    // This makes sure the queue is declared before attempting to consume from it
     channel.assertQueue(queue, {
-      durable: true,
+      durable: false,
     });
-
+    channel.prefetch(1);
+    console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
     channel.consume(
       queue,
       function (msg) {
@@ -25,12 +25,13 @@ amqp.connect("amqp://guest:guest@localhost", function (error0, connection) {
         console.log(" [x] Received %s", msg.content.toString());
         setTimeout(function () {
           console.log(" [x] Done");
+          channel.ack(msg);
         }, secs * 1000);
       },
       {
-        // automatic acknowledgment mode,
+        // manual acknowledgment mode,
         // see /docs/confirms for details
-        noAck: true,
+        ack: true,
       }
     );
   });

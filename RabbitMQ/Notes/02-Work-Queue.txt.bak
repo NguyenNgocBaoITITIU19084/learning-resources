@@ -1,0 +1,10 @@
+	*** WORK QUEUE (TASK QUEUE) ***
+- Work queue is used to distribute time-comsuming task among to multiple worker (consumers)
+- Work queue avoid doing a resource-intensive task immediately and having to wait for it complete.
+- The task will be encapsulate and sended to a queue. It will be processed by worker which is running
+in the background.
+- The task will be shared between them.
+
+* Round - Robin dispatching:
+	- The task in queue will be distribute each worker which is running. Each worker received a same 
+among of task
