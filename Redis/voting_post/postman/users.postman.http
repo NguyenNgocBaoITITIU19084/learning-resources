@@ -1,0 +1,18 @@
+// create 10 users
+POST http://localhost:3000/user/
+Content-Type: application/json
+
+###
+
+// get list users
+GET http://localhost:3000/user/
+Content-Type: application/json
+
+###
+// Create new article
+POST http://localhost:3000/article/
+Content-Type: application/json
+
+{
+    "amount": 10
+}
