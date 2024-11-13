@@ -16,3 +16,31 @@ Content-Type: application/json
 {
     "amount": 10
 }
+
+###
+
+GET http://localhost:3000/article/
+Content-Type: application/json
+
+{
+    "article_id": "articleId:10"
+}
+
+###
+
+GET http://localhost:3000/list-articles/
+Content-Type: application/json
+
+{
+    "page": 1,
+    "amountPerPage": 10
+}
+
+###
+POST http://localhost:3000/voting/
+Content-Type: application/json
+
+{
+    "userId": "userId:2",
+    "articleId": "articleId:2"
+}

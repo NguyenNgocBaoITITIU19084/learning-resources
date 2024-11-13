@@ -17,9 +17,19 @@ const connectRedis = () => {
   return client;
 };
 
-const setAsync = async (key, value) => {
+const expireAsync = async (key, timeInSecond) => {
   const client = connectRedis();
-  const setAsync = promisify(client.set).bind(client);
+  const expireAsync = promisify(client.expire).bind(client);
+  await expireAsync(key, timeInSecond)
+    .then((data) => {
+      console.log(data);
+    })
+    .catch(console.log);
+};
+
+// STRINGs
+
+const setAsync = async (key, value) => {
   await setAsync(key, value).then(console.log).catch(console.log);
 };
 
@@ -69,6 +79,18 @@ const setMembersAsync = async (key) => {
   return listMembers;
 };
 
+const setIsMemberAsync = async (key, value) => {
+  let result;
+  const client = connectRedis();
+  const setIsMemberAsync = promisify(client.sismember).bind(client);
+  await setIsMemberAsync(key, value)
+    .then((data) => {
+      console.log(data);
+      result = data;
+    })
+    .catch(console.log);
+  return result;
+};
 // HASHs
 
 const hashSetAsync = async (key, keyValuePairs) => {
@@ -76,13 +98,67 @@ const hashSetAsync = async (key, keyValuePairs) => {
   const hashSetAsync = promisify(client.hset).bind(client);
   await hashSetAsync(key, keyValuePairs).then(console.log).catch(console.log);
 };
+
+const hashGetAllAsync = async (key) => {
+  let value;
+  const client = connectRedis();
+  const hashGetAllAsync = promisify(client.hgetall).bind(client);
+  await hashGetAllAsync(key)
+    .then((data) => {
+      console.log(data);
+      value = data;
+    })
+    .catch(console.log);
+  return value;
+};
+
+const hashIncreaseByAsync = async (key, field, increment) => {
+  const client = connectRedis();
+  const hashIncreaseByAsync = promisify(client.hincrby).bind(client);
+  await hashIncreaseByAsync(key, field, increment);
+};
+
+// ZSETs
+
+const zAddAsync = async (key, keyValuePairs) => {
+  const client = connectRedis();
+  const zAddAsync = promisify(client.zadd).bind(client);
+  await zAddAsync(key, keyValuePairs).then(console.log).catch(console.log);
+};
+
+const zRevRangeAsync = async (key, start, stop) => {
+  let result;
+  const client = connectRedis();
+  const zRevRangeAsync = promisify(client.zrevrange).bind(client);
+  await zRevRangeAsync(key, start, stop)
+    .then((data) => {
+      console.log(data);
+      result = data;
+    })
+    .catch(console.log);
+  return result;
+};
+
+const zIncreaseByAsync = async (key, increment, member) => {
+  const client = connectRedis();
+  const zIncreaseByAsync = promisify(client.zincrby).bind(client);
+  zIncreaseByAsync(key, increment, member).then(console.log).catch(console.log);
+};
+
 module.exports = {
   connectRedis,
+  expireAsync,
   setAsync,
   setNXAsync,
   getAsync,
   increaseByOne,
   setAddAsync,
   setMembersAsync,
+  setIsMemberAsync,
   hashSetAsync,
+  hashGetAllAsync,
+  hashIncreaseByAsync,
+  zAddAsync,
+  zRevRangeAsync,
+  zIncreaseByAsync,
 };
